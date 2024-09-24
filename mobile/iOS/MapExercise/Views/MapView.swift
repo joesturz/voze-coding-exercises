@@ -69,25 +69,45 @@ struct MapView: View {
     /**
      This loads all the locations into the locaitons Dict and
      filteredLocations array
-     */
+     */    
     private func loadLocations() {
-        guard let url = Bundle.main.url(forResource: "locations", withExtension: "json") else {
-            print("😨 failed to locate file")
+        // The URL of the JSON file hosted on GitHub
+        guard let url = URL(string: "https://raw.githubusercontent.com/joesturz/voze-coding-exercises/refs/heads/master/mobile/map-locations/locations.json") else {
+            print("Invalid URL")
             return
         }
         
-        do {
-            let data = try Data(contentsOf: url)
-            let decoder = JSONDecoder()
-            filteredLocations = try decoder.decode([Location].self, from: data)
-            for location in filteredLocations {
-                locationsDict[location.id] = location
+        // Create a URL session data task to fetch the data
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            // Handle any errors
+            if let error = error {
+                print("Error fetching data: \(error)")
+                return
             }
-            loadLocationTypes()
-        } catch {
-            print("Failed to load or decode data: \(error)")
+            
+            // Ensure data was received
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+            
+            // Attempt to decode the data into the Location struct array
+            do {
+                let decoder = JSONDecoder()
+                filteredLocations = try decoder.decode([Location].self, from: data)
+                for location in filteredLocations {
+                    locationsDict[location.id] = location
+                }
+                loadLocationTypes()
+            } catch {
+                print("Failed to decode JSON: \(error)")
+            }
         }
+        
+        // Start the data task
+        task.resume()
     }
+
     
     /**
      This gets all the location types, the assignment said they were static
