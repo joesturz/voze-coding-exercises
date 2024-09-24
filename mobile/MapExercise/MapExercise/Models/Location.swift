@@ -53,6 +53,7 @@ struct Attribute: Decodable {
     var value: ValueType
 }
 
+//used to handle ambiguous types found in the attributes array
 enum ValueType:Decodable
 {
     case string(String)
