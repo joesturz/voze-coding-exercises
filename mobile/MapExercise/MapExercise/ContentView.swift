@@ -17,6 +17,7 @@ struct ContentView: View {
     //TODO: Add filter on location types
     @State private var locationTypes: Set<String> = []
     @State private var selectedTag: Int?
+    @State private var selectedLocation: Location?
     @State private var cameraPosition: MapCameraPosition = .automatic
     
     var body: some View {
@@ -24,13 +25,30 @@ struct ContentView: View {
             ForEach(Array(locations.keys), id: \.self) { id in
                 if let location = locations[id] {
                     let name = location.getName()
-                    Marker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)) {
-                        Text(name)
-                    }.tag(location.id)
+                    Marker(name, systemImage: location.getSystemImage(), coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)).tag(location.id)
                 }
             }
-        }.onAppear {
+        }
+        .onAppear {
             loadLocations()
+        }
+        .onChange(of: selectedTag) {
+            if let selectedTag {
+                if let newLocation = locations[selectedTag] {
+                    selectedLocation = newLocation
+                }
+            }
+        }
+        .safeAreaInset(edge: .bottom) {
+            if selectedTag != nil {
+                HStack {
+                    Spacer()
+                    InfoView(location: $selectedLocation)
+                        .padding(.top)
+                    Spacer()
+                }
+                .background(.thinMaterial)
+            }
         }
     }
 

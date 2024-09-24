@@ -26,6 +26,26 @@ struct Location: Identifiable, Decodable {
     func getRevenue() -> Double {
         return self.attributes.filter( { $0.type == "estimated_revenue_millions" } ).first!.value.getDouble() ?? 0.0
     }
+
+    func getSystemImage() -> String {
+        let type = self.getLocationType()
+        switch type {
+        case "landmark":
+            return "camera.circle"
+        case "park":
+            return "tree.circle"
+        case "museum":
+            return "building.columns.circle"
+        case "restaurant":
+            return "fork.knife.circle"
+        case "bar":
+            return "wineglass"
+        case "cafe":
+            return "cup.and.saucer"
+        default:
+            return "mappin"
+        }
+    }
 }
 
 struct Attribute: Decodable {
