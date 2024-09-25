@@ -16,7 +16,7 @@ struct PickerView: View {
             VStack {
                 HStack {
                     Spacer()
-                    Label("Pick Something", systemImage: "list.bullet.rectangle")
+                    Text("What are you looking for?")
                     Spacer()
                 }
                 HStack {

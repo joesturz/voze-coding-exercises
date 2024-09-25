@@ -11,10 +11,6 @@ import MapKit
 struct MapView: View {
     @State private var locationsDict: [Int: Location] = [:]
     @State private var filteredLocations: [Location] = []
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
-        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-    )
     @State private var locationTypes: Set<String> = []
     @State private var selectedTag: Int?
     @State private var selectedLocation: Location?
@@ -67,31 +63,26 @@ struct MapView: View {
     }
     
     /**
-     This loads all the locations into the locaitons Dict and
-     filteredLocations array
-     */    
+     This loads all the locations into the locations Dict and
+     sets the default filteredLocations array
+     */
     private func loadLocations() {
-        // The URL of the JSON file hosted on GitHub
-        guard let url = URL(string: "https://raw.githubusercontent.com/joesturz/voze-coding-exercises/refs/heads/master/mobile/map-locations/locations.json") else {
+        let jsonFile = "https://raw.githubusercontent.com/joesturz/voze-coding-exercises/refs/heads/master/mobile/map-locations/locations.json"
+        guard let url = URL(string: jsonFile) else {
             print("Invalid URL")
             return
         }
         
-        // Create a URL session data task to fetch the data
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            // Handle any errors
             if let error = error {
                 print("Error fetching data: \(error)")
                 return
             }
             
-            // Ensure data was received
             guard let data = data else {
                 print("No data received")
                 return
             }
-            
-            // Attempt to decode the data into the Location struct array
             do {
                 let decoder = JSONDecoder()
                 filteredLocations = try decoder.decode([Location].self, from: data)
@@ -103,8 +94,6 @@ struct MapView: View {
                 print("Failed to decode JSON: \(error)")
             }
         }
-        
-        // Start the data task
         task.resume()
     }
 

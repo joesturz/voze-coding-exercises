@@ -80,8 +80,8 @@ Do not edit any lines above this line break.
 
 ## Getting Started
 
-Fill out with necessary information and remove this line.
-
+I built this using Xcode 16 and targeted iOS 18 for iPhone and iPad
+I do not require any external APIs, Libraries, or Packages.
 
 
 ## Implementation

@@ -35,16 +35,6 @@
 			path = MapExercise;
 			sourceTree = "<group>";
 		};
-		D83000FF2CA0A98A0056783F /* MapExerciseTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MapExerciseTests;
-			sourceTree = "<group>";
-		};
-		D83001092CA0A98A0056783F /* MapExerciseUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MapExerciseUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				D83000ED2CA0A9890056783F /* MapExercise */,
-				D83000FF2CA0A98A0056783F /* MapExerciseTests */,
-				D83001092CA0A98A0056783F /* MapExerciseUITests */,
 				D83000EC2CA0A9890056783F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +118,6 @@
 			dependencies = (
 				D83000FE2CA0A98A0056783F /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				D83000FF2CA0A98A0056783F /* MapExerciseTests */,
-			);
 			name = MapExerciseTests;
 			packageProductDependencies = (
 			);
@@ -152,9 +137,6 @@
 			);
 			dependencies = (
 				D83001082CA0A98A0056783F /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				D83001092CA0A98A0056783F /* MapExerciseUITests */,
 			);
 			name = MapExerciseUITests;
 			packageProductDependencies = (
@@ -414,10 +396,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Joe-Sturzenegger.MapExercise";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
@@ -453,10 +436,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Joe-Sturzenegger.MapExercise";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
